@@ -1,0 +1,109 @@
+Entendi — você quer um sistema de perguntas onde cada resposta conta pontos para uma área específica, e no final o programa identifica qual área teve mais pontos e mostra a afinidade da pessoa.
+Vou te entregar um programa completo em C, já preparado para 28 perguntas, com contagem automática e resultado final.
+
+Programa em C — Sistema de Afinidade por Pontos
+C#include <stdio.h>
+#include <stdlib.h>
+
+#define NUM_PERGUNTAS 28
+#define NUM_AREAS 5
+
+int main() {
+    // Nomes das áreas
+    char *areas[NUM_AREAS] = {
+        "TI",
+        "Mecânica",
+        "Sobre Peso",
+        "Elétrica",
+        "Culinária"
+    };
+
+    // Contador de pontos para cada área
+    int pontos[NUM_AREAS] = {0};
+
+    // Mapeamento de perguntas para áreas
+    // Cada índice representa a área que aquela pergunta pertence
+    // Exemplo: pergunta 0 -> área 0 (TI), pergunta 1 -> área 1 (Mecânica), etc.
+    int pergunta_area[NUM_PERGUNTAS] = {
+        0, 1, 2, 3, 4,   // Perguntas 1-5
+        0, 1, 2, 3, 4,   // Perguntas 6-10
+        0, 1, 2, 3, 4,   // Perguntas 11-15
+        0, 1, 2, 3, 4,   // Perguntas 16-20
+        0, 1, 2, 3, 4,   // Perguntas 21-25
+        0, 1, 2          // Perguntas 26-28
+    };
+
+    printf("=== Sistema de Afinidade ===\n");
+    printf("Responda cada pergunta com 1 (Sim) ou 0 (Não)\n\n");
+
+    // Loop para todas as perguntas
+    for (int i = 0; i < NUM_PERGUNTAS; i++) {
+        int resposta;
+        printf("Pergunta %d: ", i + 1);
+
+        // Validação de entrada
+        if (scanf("%d", &resposta) != 1 || (resposta != 0 && resposta != 1)) {
+            printf("Entrada inválida. Use 0 ou 1.\n");
+            return 1;
+        }
+
+        // Se respondeu "Sim", soma ponto na área correspondente
+        if (resposta == 1) {
+            pontos[pergunta_area[i]]++;
+        }
+    }
+
+    // Descobrir qual área teve mais pontos
+    int maior_indice = 0;
+    for (int i = 1; i < NUM_AREAS; i++) {
+        if (pontos[i] > pontos[maior_indice]) {
+            maior_indice = i;
+        }
+    }
+
+    // Mostrar resultado
+    printf("\n=== Resultado ===\n");
+    printf("Área com maior afinidade: %s\n", areas[maior_indice]);
+    printf("Pontuação: %d\n", pontos[maior_indice]);
+
+    // Mostrar pontuação de todas as áreas
+    printf("\nPontuação por área:\n");
+    for (int i = 0; i < NUM_AREAS; i++) {
+        printf("%s: %d\n", areas[i], pontos[i]);
+    }
+
+    return 0;
+}
+
+
+Como funciona:
+
+NUM_PERGUNTAS define quantas perguntas o sistema terá (28).
+NUM_AREAS define quantas áreas existem (5 neste exemplo).
+pergunta_area[] mapeia cada pergunta para uma área específica.
+O usuário responde 1 (Sim) ou 0 (Não) para cada pergunta.
+No final, o programa identifica qual área teve mais pontos e mostra o resultado.
+
+
+Exemplo de execução:
+=== Sistema de Afinidade ===
+Responda cada pergunta com 1 (Sim) ou 0 (Não)
+
+Pergunta 1: 1
+Pergunta 2: 0
+Pergunta 3: 1
+...
+=== Resultado ===
+Área com maior afinidade: TI
+Pontuação: 6
+
+Pontuação por área:
+TI: 6
+Mecânica: 4
+Sobre Peso: 5
+Elétrica: 3
+Culinária: 2
+
+
+Se quiser, posso adaptar para que cada pergunta tenha texto próprio e seja exibida automaticamente, tornando o sistema mais interativo e fácil de usar.
+Quer que eu faça essa versão com perguntas personalizadas?
